@@ -6,18 +6,32 @@ demonstrating the difference between manual and framework-based approaches.
 AG-UI is an open, event-based protocol (by [CopilotKit](https://docs.ag-ui.com))
 that standardizes how AI agents communicate with user-facing frontends.
 
+## Demo Screenshots
+
+### Demo 1: Manual Implementation (port 8080)
+
+Pure FastAPI + boto3. Manually constructs AG-UI SSE events from Bedrock `converse_stream`.
+
+![Manual Demo](screenshots/manual-demo.png)
+
+### Demo 2: Strands Agent + ag-ui-strands (port 8090)
+
+One-line `StrandsAgent()` wrapper auto-converts Agent events to AG-UI protocol.
+
+![Strands Demo](screenshots/strands-demo.png)
+
+Both demos show the same scenario: multi-tool invocation (calculate + weather) with
+real-time AG-UI event streaming visible in the UI.
+
 ## Prerequisites
 
 - Python 3.12+
 - AWS credentials configured (for Bedrock Claude access)
 - AWS region `us-west-2` with Claude Sonnet model access
 
-## Two Demos
+## Quick Start
 
-### Demo 1: Manual Implementation (port 8080)
-
-`agui_server.py` -- Pure FastAPI + boto3. Manually constructs AG-UI SSE
-events from Bedrock `converse_stream` output. Zero AG-UI library dependencies.
+### Demo 1: Manual Implementation
 
 ```bash
 pip install fastapi uvicorn boto3
@@ -25,10 +39,7 @@ python agui_server.py
 # Open http://localhost:8080
 ```
 
-### Demo 2: Strands Agent + ag-ui-strands (port 8090)
-
-`agui_server_strands.py` -- Uses `ag-ui-strands` to automatically convert
-Strands Agent events into AG-UI protocol events. One-line wrapper.
+### Demo 2: Strands Agent + ag-ui-strands
 
 ```bash
 python -m venv .venv && source .venv/bin/activate
